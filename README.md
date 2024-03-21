@@ -1,6 +1,6 @@
 # 说明
 一个VitePress的项目模版，可以通过脚本自动构建sidebar配置，只需要维护一份映射文件即可，非常方便。
-
+![img.png](img.png)
 ## 目录结构
 
 ```txt
@@ -79,6 +79,7 @@ npm install
 # 本地浏览
 npm run docs:dev 
 ```
+
 
 ## 发布部署
 
