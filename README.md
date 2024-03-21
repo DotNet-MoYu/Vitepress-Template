@@ -21,8 +21,8 @@
 │  │  set_sidebar.mts       # 设置侧边栏脚本
 │  │
 │  ├─configs                # 配置页面文件夹
-│  │      config.md         # 配置页面markdown│
-├─public  								  # 存放静态资源
+│  │      config.md         # 配置页面markdown文件
+├─public                    # 存放静态资源
 │
 └─sponsor                   # 捐赠页面文件夹
 ```
@@ -55,7 +55,22 @@ sidebar: {
 }
 ```
 
-### 本地运行
+## 配置主题色
+在`theme/styles/index.scss`文件中，可以配置主题色，比如：
+```scss
+:root {
+	--vp-c-brand: #DB3C19;
+	--vp-c-brand-light:#EF4619;
+	--vp-c-brand-lighter:#FA6037;
+	--vp-c-brand-lightest: #F6785D;
+	--vp-c-brand-dark: #F14619;
+	--vp-c-brand-darker: #FF3803;
+	--vp-c-brand-dimm: #7B1803;
+}
+```
+具体可以参考vitepress官方文档：[https://vitepress.dev/zh/guide/extending-default-theme](https://vitepress.dev/zh/guide/extending-default-theme)
+
+## 本地运行
 
 ```bash
 # 安装依赖
@@ -65,7 +80,7 @@ npm install
 npm run docs:dev 
 ```
 
-### 发布部署
+## 发布部署
 
 ```bash
 npm run docs:build 
