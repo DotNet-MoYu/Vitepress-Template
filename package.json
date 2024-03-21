@@ -1,0 +1,26 @@
+{
+	"name": "moyu-docs",
+	"version": "1.0.0",
+	"description": "MoYu框架文档",
+	"author": {
+		"name": "少林寺驻北固山办事处大神父王喇嘛",
+		"email": "531035580@52moyu.net",
+		"url": "https://gitee.com/huguodong520"
+	},
+	"license": "MIT",
+	"homepage": "https://gitee.com/dotnetmoyu/Vitepress-Template",
+	"scripts": {
+		"docs:dev": "vitepress dev docs --host",
+		"docs:build": "vitepress build docs",
+		"docs:preview": "vitepress preview docs"
+	},
+	"devDependencies": {
+		"@types/node": "^20.11.29",
+		"markdown-it-custom-attrs": "^1.0.2",
+		"sass": "^1.72.0",
+		"typescript": "^5.4.2",
+		"vite": "^5.1.6",
+		"vitepress": "1.0.0-rc.45",
+		"vue": "^3.4.21"
+	}
+}
