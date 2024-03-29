@@ -11,7 +11,7 @@
 .VPHome {
   padding-bottom: 80px !important;
   .image-bg {
-    background-image: linear-gradient(-45deg, #FB2E01 70%, #F8CD7A 50%);
+    background-image: linear-gradient(-45deg, #37CD9B 70%, #F8CD7A 50%);
     filter: blur(70px);
     width: 256px;
     height: 256px;
@@ -30,13 +30,13 @@
  * -------------------------------------------------------------------------- */
 
 :root {
-  --vp-c-brand: #DB3C19;
-  --vp-c-brand-light:#EF4619;
-  --vp-c-brand-lighter:#FA6037;
-  --vp-c-brand-lightest: #F6785D;
-  --vp-c-brand-dark: #F14619;
-  --vp-c-brand-darker: #FF3803;
-  --vp-c-brand-dimm: #7B1803;
+	--vp-c-brand: #04CB88;
+	--vp-c-brand-light:#0ECD8D;
+	--vp-c-brand-lighter:#37CD9B;
+	--vp-c-brand-lightest:#31CB98;
+	--vp-c-brand-dark: #3CDBA6;
+	--vp-c-brand-darker: #2EAD83;
+  //--vp-c-brand-dimm: #7B1803;
 
 }
 
