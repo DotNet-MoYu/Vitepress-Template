@@ -3,6 +3,7 @@ import {defineConfig} from "vitepress";
 import {set_sidebar} from "../guide/set_sidebar.mjs";
 
 export default defineConfig({
+	base: "/vitepress-template",//部署到GitHub Pages时的仓库名
 	title: "Vitepress-Template",
 	lang: "zh-CN",
 	description: "Vitepress-Template 官方文档",
