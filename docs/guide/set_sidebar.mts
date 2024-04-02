@@ -1,6 +1,5 @@
 import path from 'node:path';
 import fs from 'node:fs';
-
 // 文件根目录
 const DIR_PATH = path.resolve();
 // 映射文件路径
@@ -30,12 +29,16 @@ const intersections = (arr1, arr2) =>
 	Array.from(new Set(arr1.filter((item) => !new Set(arr2).has(item))));
 
 // 把方法导出直接使用
-function getList(params, path1, pathname) {
+function getList(params, path1, pathname, ifSort, collapsed, sortOrder) {
 	// 存放结果
-	const res = [];
+	let res = [];
+	// 如果启用了排序
+	if (!ifSort && sortOrder) {
+		// 使用 sortOrder 数组来确定文件的顺序
+		params.sort((a, b) => sortOrder.indexOf(a) - sortOrder.indexOf(b));
+	}
 	// 开始遍历params
 	for (let file of params) {
-
 		// 获取文件或文件夹的映射名称，如果存在
 		const mappedName = nameMappings[file] || file;
 		// 拼接目录
@@ -44,18 +47,25 @@ function getList(params, path1, pathname) {
 		const isDir = isDirectory(dir);
 		if (isDir) {
 			// 如果是文件夹,读取之后作为下一次递归参数
-			const files = fs.readdirSync(dir);
-			const items = getList(files, dir, `${pathname}/${file}`).sort(sortItemsByText);
+			let files = fs.readdirSync(dir);
+			if (!ifSort) {
+				// 根据 sortOrder 中的顺序过滤和排序目录中的文件
+				files = files.filter(file => sortOrder.includes(file)).sort((a, b) => {
+					return sortOrder.indexOf(a) - sortOrder.indexOf(b);
+				});
+			}
+			let items = getList(files, dir, `${pathname}/${file}`, ifSort, collapsed, sortOrder);
+			if (ifSort) items = items.sort(sortItemsByText);
+			// else items = items.reverse();
 			res.push({
 				text: mappedName,
 				collapsible: true,
-				collapsed: true,
+				collapsed: collapsed,
 				items: items,
 			});
 		} else {
 			// 获取名字
 			let name = path.basename(file)
-			console.log(name)
 			// 排除非 md 文件
 			const suffix = path.extname(file);
 			if (suffix !== '.md') {
@@ -70,21 +80,29 @@ function getList(params, path1, pathname) {
 			});
 		}
 	}
-	// 对当前层级的项目进行排序
-	return res.sort(sortItemsByText);
+	console.log(res)
+	return res;
 }
 
-export const set_sidebar = (pathname) => {
+/*
+ * 设置侧边栏
+ * @param {string} pathname 路径
+ * @param {boolean} ifSort 是否排序
+ * @param {boolean} collapsed 是否折叠
+ */
+export const set_sidebar = (pathname, ifSort = false, collapsed = false) => {
 	// 获取pathname的路径
 	const dirPath = path.join(DIR_PATH, "docs", pathname);
 	// 读取pathname下的所有文件或者文件夹
 	const files = fs.readdirSync(dirPath);
 	// 过滤掉
 	const items = intersections(files, WHITE_LIST);
+	// 根据mapping.json文件中定义的顺序对files排序
+	const sortOrder = Object.keys(nameMappings);
 	// getList
-	const sidebars = getList(items, dirPath, pathname);
+	const sidebars = getList(items, dirPath, pathname, ifSort, collapsed, sortOrder);
 	//输出sidebars 转为json数组字符串格式
-	console.log(JSON.stringify(sidebars, null, 2));
+	// console.log(JSON.stringify(sidebars, null, 2));
 	return sidebars;
 };
 
@@ -109,9 +127,12 @@ function sortItemsByText(a, b) {
 	// 去除末尾的非数字字符，例如 “2.” 将会变成 “2”
 	aFirstPart = aFirstPart.replace(/\D*$/, '');
 	bFirstPart = bFirstPart.replace(/\D*$/, '');
-
-	// 使用自定义的版本号比较
-	return compareVersionNumbers(aFirstPart, bFirstPart);
+	// 如果aFirstPart和bFirstPart都包含数字，则比较数字大小
+	if (aFirstPart && bFirstPart) {
+		return compareNumbers(aFirstPart, bFirstPart);
+	}
+	// 如果任意一方或双方不包含数字，按照它们原始索引位置排序
+	return 0;
 }
 
 /*

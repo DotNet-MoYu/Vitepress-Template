@@ -10,7 +10,7 @@ export default defineConfig({
 	head: [
 		["meta", {name: "author", content: "少林寺驻北固山办事处大神父王喇嘛"}],
 		["meta", {name: "keywords", content: "Vitepress-Template,"}],
-		["link", {rel: "icon", href: "/icon.png"}],
+		["link", {rel: "icon", href: "../public/icon.png"}],
 		["link", {rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"}],
 		["script", {src: "https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"}],
 	],
@@ -21,6 +21,11 @@ export default defineConfig({
 		//搜索
 		search: {
 			provider: "local"
+		},
+		outline: {
+			level: [2, 4], // 显示2-4级标题
+			// level: 'deep', // 显示2-6级标题
+			label: '当前页大纲' // 文字显示
 		},
 		// algolia: {
 		//     appId: "xxx",
@@ -56,7 +61,7 @@ export default defineConfig({
 		],
 
 		sidebar: {
-			"/guide/introduce/": set_sidebar('/guide/introduce'),
+			"/guide/introduce/": set_sidebar('/guide/introduce',false),
 			"/guide/docs/": set_sidebar('/guide/docs'),
 		},
 	},
