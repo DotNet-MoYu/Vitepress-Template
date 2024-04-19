@@ -125,3 +125,8 @@
 	--vp-c-indigo-3: var(--vp-c-brand-light);
 	--vp-c-indigo-soft: #491307;
 }
+
+//`xx`里面的字体颜色
+.vp-doc :not(pre) > code {
+	color: red;
+}

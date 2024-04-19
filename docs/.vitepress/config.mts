@@ -10,7 +10,7 @@ export default defineConfig({
 	head: [
 		["meta", {name: "author", content: "少林寺驻北固山办事处大神父王喇嘛"}],
 		["meta", {name: "keywords", content: "Vitepress-Template,"}],
-		["link", {rel: "icon", href: "../public/icon.png"}],
+		["link", {rel: "icon", href: "/icon.png"}],
 		["link", {rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"}],
 		["script", {src: "https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"}],
 	],
